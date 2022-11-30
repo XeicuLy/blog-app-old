@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faFilePen, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
-export const Navbar = () => {
+export const Navbar = ({ isAuth }: any) => {
   return (
     <nav css={navStyle}>
       <Link css={linkStyle} to='/'>
@@ -14,10 +14,17 @@ export const Navbar = () => {
         <FontAwesomeIcon css={iconStyle} icon={faFilePen} />
         記事投稿
       </Link>
-      <Link css={linkStyle} to='/login'>
-        <FontAwesomeIcon css={iconStyle} icon={faArrowRightToBracket} />
-        ログイン
-      </Link>
+      {!isAuth ? (
+        <Link css={linkStyle} to='/login'>
+          <FontAwesomeIcon css={iconStyle} icon={faArrowRightToBracket} />
+          ログイン
+        </Link>
+      ) : (
+        <Link css={linkStyle} to='/logout'>
+          <FontAwesomeIcon css={iconStyle} icon={faArrowRightToBracket} />
+          ログアウト
+        </Link>
+      )}
     </nav>
   );
 };
